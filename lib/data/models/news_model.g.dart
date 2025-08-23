@@ -1,0 +1,23 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'news_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+NewsModel _$modelsFromJson(Map<String, dynamic> json) => NewsModel(
+      status: json['status'] as String,
+      totalResults: (json['totalResults'] as num).toInt(),
+      results: (json['results'] as List<dynamic>)
+          .map((e) => Article.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      nextPage: json['nextPage'] as String?,
+    );
+
+Map<String, dynamic> _$modelsToJson(NewsModel instance) => <String, dynamic>{
+      'status': instance.status,
+      'totalResults': instance.totalResults,
+      'results': instance.results,
+      'nextPage': instance.nextPage,
+    };
