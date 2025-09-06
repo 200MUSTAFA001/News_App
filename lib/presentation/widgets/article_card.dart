@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_app/data/models/article_model.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/functions/write_and_read_local_storage_functions.dart';
+import '../../data/functions/local_storage_functions.dart';
+import '../../data/models/article_model.dart';
 
 class ArticleCard extends StatefulWidget {
   const ArticleCard({super.key, required this.article});
@@ -28,37 +29,33 @@ class _ArticleCardState extends State<ArticleCard> {
       child: Container(
         padding: const EdgeInsets.only(top: 18, bottom: 18),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
+          color: context.theme.primaryColor,
           borderRadius: const BorderRadius.all(
             Radius.circular(14),
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(14),
               child: CachedNetworkImage(
-                height: 180,
-                width: MediaQuery.of(context).size.width * 0.8,
-                fit: BoxFit.cover,
+                height: context.height * 0.25,
+                width: context.width * 0.9,
+                fit: BoxFit.fill,
                 imageUrl: widget.article.imageUrl ?? "",
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                        child: CircularProgressIndicator(
-                            value: downloadProgress.progress)),
-                errorWidget: (context, url, error) =>
-                    Image.asset("assets/images/placeholder.png"),
+                progressIndicatorBuilder: (_, __, ___) =>
+                    const Center(child: CupertinoActivityIndicator(radius: 26)),
+                errorWidget: (_, __, ___) => Image.asset(
+                    "assets/images/placeholder.png",
+                    fit: BoxFit.fill),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             SizedBox(
               height: 50,
-              width: MediaQuery.of(context).size.width * 0.8,
+              width: context.width * 0.8,
               child: Text(
                 widget.article.title,
                 style: GoogleFonts.robotoSlab(
@@ -71,8 +68,8 @@ class _ArticleCardState extends State<ArticleCard> {
               height: 10,
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.07,
-              width: MediaQuery.of(context).size.width * 0.9,
+              height: context.height * 0.07,
+              width: context.width * 0.9,
               child: ListTile(
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
@@ -81,12 +78,9 @@ class _ArticleCardState extends State<ArticleCard> {
                       width: 40,
                       fit: BoxFit.cover,
                       imageUrl: widget.article.sourceIcon,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => Center(
-                                child: CircularProgressIndicator(
-                                    value: downloadProgress.progress),
-                              ),
-                      errorWidget: (context, url, error) =>
+                      progressIndicatorBuilder: (_, __, ___) => const Center(
+                          child: CupertinoActivityIndicator(radius: 20)),
+                      errorWidget: (_, __, ___) =>
                           const Icon(Icons.error_outline_outlined)),
                 ),
                 title: Text(
@@ -97,9 +91,8 @@ class _ArticleCardState extends State<ArticleCard> {
                 trailing: Obx(() {
                   return FloatingActionButton(
                     elevation: 0,
-                    backgroundColor: Theme.of(context)
-                        .floatingActionButtonTheme
-                        .backgroundColor,
+                    backgroundColor:
+                        context.theme.floatingActionButtonTheme.backgroundColor,
                     onPressed: () {
                       savedArticles.assignAll(readArticles());
 

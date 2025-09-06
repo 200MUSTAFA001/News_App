@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomDropDownButton extends StatelessWidget {
   final List<String> items = ['ar', 'en', 'fr', 'ru', 'es', 'zh'];
@@ -17,7 +18,7 @@ class CustomDropDownButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Theme.of(context).primaryColor,
+        color: context.theme.primaryColor,
         boxShadow: const [
           BoxShadow(
             offset: Offset(0, 2),

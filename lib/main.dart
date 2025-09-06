@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_app/app_router.dart';
-import 'package:flutter_api_app/theme_data.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:news_app/theme_data.dart';
 
-import 'data/functions/write_and_read_local_storage_functions.dart';
-import 'data/localization/localitation_class.dart';
+import 'app_router.dart';
+import 'data/functions/local_storage_functions.dart';
+import 'data/localization/localization_class.dart';
 
 Future<void> main() async {
   await GetStorage.init();
   runApp(const MyApp());
+}
+
+bool langValue() {
+  final lang = box.read("langkey");
+  if (lang != null) {
+    return lang;
+  } else {
+    return false;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -18,16 +27,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mode = RxBool(box.read("mode") ?? false);
-    final lang = box.read("langkey") as bool;
     return Obx(() {
       return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          locale: translation(lang),
-          translations: MyTranslations(),
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: themeMode(mode.value),
-          home: AppRouter(mode: mode));
+        debugShowCheckedModeBanner: false,
+        locale: translation(langValue()),
+        translations: MyTranslations(),
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: themeMode(mode.value),
+        home: AppRouter(mode: mode),
+      );
     });
   }
 }

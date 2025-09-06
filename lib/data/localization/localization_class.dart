@@ -26,7 +26,6 @@ class MyTranslations extends Translations {
           "Show Saved Articles": "Show Saved Articles",
           "To See The Full Article Click Here":
               "To See The Full Article Click Here",
-          "Welcome Back!": "Welcome Back!",
           "articles": "articles",
           "No internet connection": "No internet connection",
           "Please check your internet connection":
@@ -45,7 +44,10 @@ class MyTranslations extends Translations {
           "delete": "delete",
           "error": "error",
           "Deleted": "Deleted",
-          "Cache data deleted": "Cache data deleted"
+          "Cache data deleted": "Cache data deleted",
+          "Good Morning": "Good Morning",
+          "Good Afternoon": "Good Afternoon",
+          "Good Evening": "Good Evening",
         },
         "ar": {
           "Dark mode": "الوضع المظلم",
@@ -58,7 +60,6 @@ class MyTranslations extends Translations {
           "Settings": "الأعدادات",
           "Show Saved Articles": "المقالات المحفوطة",
           "To See The Full Article Click Here": "لرؤية المقالة كاملة اضغط هنا",
-          "Welcome Back!": "مرحبا بك !",
           "general": "اخر الاخبار",
           "No internet connection": "لا يوجد اتصال بالأنترنت",
           "Please check your internet connection":
@@ -77,7 +78,10 @@ class MyTranslations extends Translations {
           "delete": "حذف",
           "error": "حدث خطأ",
           "Deleted": "تم الحذف",
-          "Cache data deleted": "تم حذف الذاكرة المؤقتة بنجاح"
+          "Cache data deleted": "تم حذف الذاكرة المؤقتة بنجاح",
+          "Good Morning": "صباح الخير",
+          "Good Afternoon": "مساء الخير",
+          "Good Evening": "مساء الخير",
         },
       };
 }

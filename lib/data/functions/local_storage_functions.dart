@@ -1,5 +1,7 @@
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../localization/localization_class.dart';
 import '../models/article_model.dart';
 
 final box = GetStorage();
@@ -21,4 +23,19 @@ List<Article> readArticles() {
         .toList();
   }
   return [];
+}
+//
+//
+
+void saveLanguageValue(
+  RxString lang,
+  RxBool langBool,
+  bool selectedLangBool,
+  String selectedLangString,
+) {
+  lang.value = selectedLangString;
+  box.write("buttonvalue", lang.value);
+  langBool.value = selectedLangBool;
+  Get.updateLocale(translation(langBool.value));
+  box.write("langkey", langBool.value);
 }

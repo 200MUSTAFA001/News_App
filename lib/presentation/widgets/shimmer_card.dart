@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ShimmerCard extends StatelessWidget {
   const ShimmerCard({super.key});
@@ -9,7 +10,7 @@ class ShimmerCard extends StatelessWidget {
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.only(top: 18, bottom: 18),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: context.theme.primaryColor,
         border: Border.all(
             color: Colors.transparent, width: 2, style: BorderStyle.solid),
         borderRadius: const BorderRadius.all(
@@ -29,7 +30,7 @@ class ShimmerCard extends StatelessWidget {
           ),
           SizedBox(
             height: 50,
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: context.width * 0.8,
             child: const Text(
               "shimmer card shimmer card shimmer card",
             ),
@@ -38,8 +39,8 @@ class ShimmerCard extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.07,
-            width: MediaQuery.of(context).size.width * 0.9,
+            height: context.height * 0.07,
+            width: context.width * 0.9,
             child: ListTile(
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(20),

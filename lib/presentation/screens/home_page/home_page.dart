@@ -15,6 +15,7 @@ import '../article_details_page/article_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.mode});
+
   final RxBool mode;
 
   @override
@@ -46,6 +47,8 @@ class _HomePageState extends State<HomePage> {
   final nextPage = "".obs;
   final savedArticles = <Article>[];
   final isSaveButtonSelected = false.obs;
+  final previousNextPageValue = "".obs;
+  final toTop = false.obs;
 
   @override
   void initState() {
@@ -54,9 +57,16 @@ class _HomePageState extends State<HomePage> {
     getDataByQuery(query.value, articlesLanguage.value);
 
     scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        if (nextPage.value.isNotEmpty) {
+      if (scrollController.position.pixels >=
+          (scrollController.position.maxScrollExtent * 0.1)) {
+        toTop.value = true;
+      }
+
+      if (scrollController.position.pixels >=
+          (scrollController.position.maxScrollExtent * 0.9)) {
+        if (nextPage.value.isNotEmpty &&
+            previousNextPageValue.value != nextPage.value) {
+          previousNextPageValue.value = nextPage.value;
           getMoreArticles();
         }
       }
@@ -71,7 +81,7 @@ class _HomePageState extends State<HomePage> {
       if (result != null) {
         articles.assignAll(result.results);
         if (result.nextPage != null) {
-          nextPage.value = result.nextPage!;
+          nextPage.value = result.nextPage ?? "";
         }
       }
     });
@@ -86,7 +96,7 @@ class _HomePageState extends State<HomePage> {
       if (result != null) {
         articles.assignAll(result.results);
         if (result.nextPage != null) {
-          nextPage.value = result.nextPage!;
+          nextPage.value = result.nextPage ?? "";
         }
       }
     });
@@ -120,6 +130,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       drawer: CustomDrawer(mode: widget.mode),
+      floatingActionButton: Obx(() {
+        return toTop.value == true
+            ? FloatingActionButton(
+                onPressed: () {
+                  scrollController
+                      .animateTo(0,
+                          duration: const Duration(seconds: 1),
+                          curve: Curves.decelerate)
+                      .then((_) => toTop.value = false);
+                },
+                child: const Icon(Icons.arrow_upward),
+              )
+            : const SizedBox();
+      }),
       body: SafeArea(
         child: RefreshIndicator(
           displacement: 80,

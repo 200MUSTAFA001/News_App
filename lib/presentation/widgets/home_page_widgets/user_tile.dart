@@ -6,9 +6,18 @@ import 'package:intl/intl.dart';
 import '../../screens/saved_articles_page/saved_articles_page.dart';
 
 class UserTile extends StatelessWidget {
+  UserTile({super.key});
   final time = DateTime.now();
 
-  UserTile({super.key});
+  String welcomeSentience(int hour) {
+    if (hour <= 11) {
+      return "Good Morning";
+    } else if (hour <= 18) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,7 @@ class UserTile extends StatelessWidget {
             scale: 1.3, child: Image.asset("assets/images/vector.png")),
       ),
       title: Text(
-        'Welcome Back!'.tr,
+        welcomeSentience(time.hour).tr,
         style: GoogleFonts.aBeeZee(fontSize: 20, fontWeight: FontWeight.w600),
       ),
       subtitle: Text('$day, ${time.day} $month'),
@@ -35,8 +44,8 @@ class UserTile extends StatelessWidget {
         tooltip: 'Show Saved Articles'.tr,
         iconSize: 40,
         style: IconButton.styleFrom(
-          backgroundColor: Theme.of(context).cardColor,
-          foregroundColor: Theme.of(context).primaryColorLight,
+          backgroundColor: context.theme.cardColor,
+          foregroundColor: context.theme.primaryColorLight,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),

@@ -16,16 +16,14 @@ Future<void> deleteCache() async {
             entity.deleteSync(recursive: true);
           }
         } catch (e) {
-          Get.snackbar("error".tr, "error".tr, backgroundColor: Colors.red);
-          // print('Error deleting ${entity.path}: $e');
+          Get.snackbar("error".tr, "error".tr,
+              backgroundColor: Colors.red, colorText: Colors.white);
         }
       });
       Get.snackbar("Deleted".tr, "Cache data deleted".tr,
-          backgroundColor: Colors.green);
-      // print('Cache cleared successfully');
+          backgroundColor: Colors.green, colorText: Colors.white);
     }
   } catch (e) {
     Get.snackbar("error".tr, "error".tr, backgroundColor: Colors.red);
-    // print('Error clearing cache: $e');
   }
 }

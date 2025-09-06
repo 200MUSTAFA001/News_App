@@ -1,4 +1,4 @@
-import 'package:flutter_api_app/data/functions/write_and_read_local_storage_functions.dart';
+import 'package:news_app/data/functions/local_storage_functions.dart';
 
 import '../models/article_model.dart';
 

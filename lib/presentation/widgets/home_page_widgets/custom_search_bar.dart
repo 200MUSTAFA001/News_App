@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_app/presentation/widgets/home_page_widgets/search_button.dart';
+import 'package:get/get.dart';
+import 'package:news_app/presentation/widgets/home_page_widgets/search_button.dart';
 
 import 'articles_search_bar.dart';
 
@@ -25,8 +26,8 @@ class CustomSearchBar extends StatelessWidget {
       spacing: 14,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: MediaQuery.of(context).size.height * 0.08,
+          width: context.width * 0.5,
+          height: context.height * 0.08,
           child: ArticlesSearchBar(
               controller: controller, onSubmitted: onSubmitted),
         ),
